@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url('img/disney-plus-hotstar-1.webp'); /* Replace with the actual image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Optional - keeps the background fixed while scrolling */
+            background-position: center center;
+            background-color: #001f3f; /* Fallback background color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Background color for the content */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #0078d4; /* Disney Hotstar blue color */
+            transition: color 0.3s ease;
+        }
+
+        h2:hover {
+            color: #005ea2; /* Darker blue on hover */
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        label, input {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="text"]::placeholder, input[type="password"]::placeholder {
+            color: #333; /* Placeholder text color */
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #0078d4; /* Disney Hotstar blue color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005ea2; /* Darker blue on hover */
+        }
+
+        /* Basic animation for the form */
+        form {
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return loginUser()">
+            <label for="usernameOrPhone">Username or Phone Number:</label>
+            <input type="text" id="usernameOrPhone" name="usernameOrPhone" required placeholder="Enter your username or phone number"><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password"><br><br>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        // Function to clear input fields and localStorage
+        function clearInputFields() {
+            document.getElementById("usernameOrPhone").value = '';
+            document.getElementById("password").value = '';
+            localStorage.clear();
+        }
+
+        // Check if data is stored in localStorage and populate input fields
+        function checkLocalStorage() {
+            const storedUsernameOrPhone = localStorage.getItem("usernameOrPhone");
+            const storedPassword = localStorage.getItem("password");
+
+            if (storedUsernameOrPhone && storedPassword) {
+                document.getElementById("usernameOrPhone").value = storedUsernameOrPhone;
+                document.getElementById("password").value = storedPassword;
+            }
+        }
+
+        // Clear input fields on page load
+        window.onload = clearInputFields;
+
+        // Save input data to localStorage
+        function saveToLocalStorage() {
+            const usernameOrPhone = document.getElementById("usernameOrPhone").value;
+            const password = document.getElementById("password").value;
+            localStorage.setItem("usernameOrPhone", usernameOrPhone);
+            localStorage.setItem("password", password);
+        }
+
+        // Event listener to save data to localStorage when the form is submitted
+        document.getElementById("loginForm").addEventListener("submit", function() {
+            saveToLocalStorage();
+        });
+
+        function loginUser() {
+            var usernameOrPhone = document.getElementById("usernameOrPhone").value;
+            var password = document.getElementById("password").value;
+
+            if (!usernameOrPhone || !password) {
+                alert("Please fill in both fields.");
+                return false;
+            }
+
+            // Replace the following with your authentication logic
+            if ((usernameOrPhone === "demo" || usernameOrPhone === "1234567890") && password === "password123") {
+                alert("Login successful!");
+                window.location.href = "https://hotstardisney-clone.netlify.app/"; // Replace with your desired URL
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+
+            return false;
+        }
+
+        // Check if data is stored in localStorage and populate input fields on page load
+        checkLocalStorage();
+    </script>
+</body>
+</html>
